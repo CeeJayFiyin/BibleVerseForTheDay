@@ -16,16 +16,25 @@
     </div>
 
     <script>
-        async function getVerseOfTheDay() {
-            const response = await fetch('https://labs.bible.org/api/?passage=votd&type=json');
+        async function fetchVerseOfTheDay() {
+    try {
+        const response = await fetch('https://labs.bible.org/api/?passage=random&type=json');
+        
+        if (response.ok) {
             const data = await response.json();
             const verse = data[0].text;
-
-            document.getElementById("verse").textContent = verse;
+            const reference = data[0].bookname + ' ' + data[0].chapter + ':' + data[0].verse;
+            console.log(`Verse of the day: ${verse} (${reference})`);
+        } else {
+            console.error('Failed to fetch verse of the day:', response.statusText);
         }
+    } catch (error) {
+        console.error('Error fetching verse of the day:', error.message);
+    }
+}
 
-        // Initial content generation
-        getVerseOfTheDay();
+fetchVerseOfTheDay();
+
     </script>
 </body>
 
