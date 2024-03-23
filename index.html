@@ -12,13 +12,13 @@
     <div class="quote-box">
         <h2>Bible Verse For The Day</h2>
         <div id="verse"></div>
-        <button onclick="fetchVerseOfTheDay('https://labs.bible.org/api/?passage=random&type=json')">Get Verse</button>
+        <button onclick="fetchVerseOfTheDay()">Get Verse</button>
     </div>
 
     <script>
         async function fetchVerseOfTheDay() {
     try {
-        const response = await fetch('https://labs.bible.org/api/?passage=random&type=json');
+        const response = await fetch('https://www.ourmanna.com/verses/api/get?format=json');
         
         if (response.ok) {
             const data = await response.json();
